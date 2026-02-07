@@ -1,41 +1,76 @@
 import Image from "next/image";
 
+const STATIC_PHOTOS = [
+  "https://images.pexels.com/photos/1583244/pexels-photo-1583244.jpeg",
+  "https://images.pexels.com/photos/12517431/pexels-photo-12517431.jpeg",
+  "https://images.pexels.com/photos/12636165/pexels-photo-12636165.jpeg",
+  "https://images.pexels.com/photos/672630/pexels-photo-672630.jpeg",
+];
+
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col items-center row-start-2 gap-8 sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="space-y-12">
+      {/* 1. Breadcrumbs Placeholder */}
+      <nav className="text-sm font-medium text-coin-silver mb-8">
+        <span className="hover:text-mango-leaf cursor-pointer">Home</span>
+        <span className="mx-2">/</span>
+        <span className="text-copper">Shiva</span>
+      </nav>
 
-        <div className="flex flex-col items-center gap-4 sm:flex-row">
-        
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* 2. Collections Section (Folders) */}
+      <section>
+        <div className="flex justify-between items-end mb-6">
+          <h2 className="text-2xl font-serif text-betel-nut">Top Collections</h2>
+          <button className="text-sm text-mango-leaf font-semibold border-b border-mango-leaf pb-0.5">
+            See all collections
+          </button>
         </div>
-      </main>
-    
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {['Pooja Mandir', 'Social Media', 'Home Decor', 'Wall Art'].map((folder) => (
+            <div key={folder} className="group cursor-pointer">
+              <div className="relative aspect-square overflow-hidden rounded-2xl border-2 border-transparent group-hover:border-pasupu transition-all">
+                <Image 
+                  src={STATIC_PHOTOS[0]} 
+                  alt={folder}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-betel-nut/60 to-transparent" />
+                <div className="absolute bottom-3 left-3 text-white">
+                  <p className="font-medium text-sm">{folder}</p>
+                  <p className="text-[10px] opacity-80">24 Photos</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 3. Photo Grid (Pinterest Format) */}
+      <section>
+        <h2 className="text-2xl font-serif text-betel-nut mb-6">Recent Additions</h2>
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4">
+          {STATIC_PHOTOS.map((url, index) => (
+            <div key={index} className="mb-4 break-inside-avoid relative group">
+              <div className="rounded-xl overflow-hidden border border-kalasam-silver/30 shadow-sm hover:shadow-xl transition-shadow bg-white">
+                <Image 
+                  src={url} 
+                  alt={`Sanatan Photo ${index}`}
+                  width={500}
+                  height={500}
+                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+                />
+                {/* Conversion Point Hover Overlay */}
+                <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
+                  <button className="bg-pasupu text-betel-nut px-4 py-2 rounded-full text-xs font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                    View & Download
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
