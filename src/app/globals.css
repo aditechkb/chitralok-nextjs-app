@@ -3,25 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Rice White Background as the default */
+  --background: #FBFBF7; 
+  /* Betel Nut / Grounding Brown as the default text color */
+  --foreground: #682E1F; 
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Using a serif font as you requested for that traditional, calm feel */
+  font-family: 'Georgia', serif; 
+  @apply antialiased;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Pinterest-style masonry adjustment to ensure smooth spacing */
+.columns-1 {
+  column-gap: 1.5rem;
 }
